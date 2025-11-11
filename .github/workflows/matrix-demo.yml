@@ -18,7 +18,7 @@ jobs:
           dotnet-version: ${{ matrix.version }}
 
       - name: Build Solution
-        run: dotnet build CleanCodeDevOps/CleanCodeDevOps.sln
+        run: dotnet build ./CleanCodeDevOps/CleanCodeDevOps.sln
 
       - name: Print Matrix values
         run: | 
