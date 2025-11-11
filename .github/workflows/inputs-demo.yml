@@ -10,14 +10,15 @@ on:
 
 jobs: 
   run-job: 
-    if: ${{ github.event.inputs.lvls >= 42 }}
     runs-on: ubuntu-latest
     steps: 
       - name: Kör om nivå är tillräcklig
+        if: ${{ github.event.inputs.lvls >= 42 }}
         run: echo "Nivå är ${{ github.event.inputs.lvls }}, jobbet körs!"
 
-  skip: ${{ github.event.inputs.lvls < 42 }}
-  runs-on: ubuntu-latest
-  steps:
-    - name: Hoppa över jobbet
-      run: echo "Nivä är: ${{ github.event.inputs.lvls }}, för lågt för att köra jobbet."
+      - name: Kör inte om nivå är för låg
+        if: ${{ github.event.inputs.lvls < 42 }}
+        run: echo "Nivå är ${{ github.event.inputs.lvls }}, kör ej jobbat, nivå under 42"
+        
+
+      
