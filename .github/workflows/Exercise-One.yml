@@ -1,0 +1,23 @@
+name: Exercise One
+
+on: 
+  workflow_dispatch:
+    inputs:
+      GetNumber:
+        description: "Number need to be higher then seven to run"
+        required: true
+        type: number
+
+jobs: 
+  run-number-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runs if the number is higher than seven
+        if: ${{ github.event.inputs.GetNumber > 7 }}
+        run: echo "This number is higher than seven and the work will continue"
+
+      - name: Dont run if the number is lower than seven
+        if: ${{ github.event.inputs.GetNumber <= 7}}
+        run: echo "This number is to low and the work will not continue"
+        
+
