@@ -15,6 +15,10 @@ jobs:
       - name: this is the first step 
         env:
           STEP_LEVEL: "step level"
-        run: echo "I think we can display all the env here: $WORKFLOW_LEVEL , $JOB_LEVEL , $STEP_LEVEL"
+        run: |
+          echo "Workflow level: $WORKFLOW_LEVEL"
+          echo "Job level: $JOB_LEVEL"
+          echo "Step level: $STEP_LEVEL"
+        
   
 
