@@ -1,0 +1,20 @@
+name: Exercise Two
+
+on:
+  workflow_dispatch
+
+env: 
+  WORKFLOW_LEVEL: "workflow level"
+
+jobs: 
+  exercise-two:
+    runs-on: ubuntu-latest
+    env:
+      JOB_LEVEL: "job level"
+    steps:
+      - name: this is the first step 
+        env:
+          STEP_LEVEL: "step level"
+        run: echo "I think we can display all the env here: $WORKFLOW_LEVEL , $JOB_LEVEL , $STEP_LEVEL"
+  
+
