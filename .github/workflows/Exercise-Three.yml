@@ -1,0 +1,30 @@
+name: Exercise Three
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        version: [9.0, 8.0, 7,0]
+
+    steps: 
+      - name: setup .NET
+        uses: actions/setup-dotnet@v5.0.0
+        with: 
+          dotnet-version: ${{ matrix.version }}
+
+      - name: Build solution
+        run: dotnet build CleanCodeDevOps/CleanCodeDevOps.sln
+
+      - name: Print matrix values
+        run: | 
+          echo "Running on: ${{ matrix.os }}"
+          echo "Version: ${{ matrix.version }}"
+        
+     
+  
+
