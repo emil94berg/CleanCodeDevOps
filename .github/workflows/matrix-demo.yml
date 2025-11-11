@@ -1,0 +1,34 @@
+name: Matrix Demo  
+
+on: 
+  workflow_dispatch
+
+jobs:
+  build: 
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        version: [9.0, 8.0]
+
+    steps: 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5.0.0
+        with: 
+          dotnet-version: ${{ matrix.version }}
+
+      - name: Build Solution
+        run: dotnet build
+
+      - name: Print Matrix values
+        run: | 
+          echo "Runnit on: {{ matrix.os }}"
+          echo "Uses .NET version {{ matrix.verson }}"
+
+  post-build: 
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post build summary
+        run: echo "All amtrix build are complete - running post-build-jobs"
+
