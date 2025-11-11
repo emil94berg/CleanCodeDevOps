@@ -1,0 +1,23 @@
+name: Input Demo
+
+on: 
+  workflow_dispatch:
+    inputs: 
+      lvls: 
+        description: "Ange ett nivåvärde"
+        required: true
+        type: number
+
+jobs: 
+  run-job: 
+    if: ${{ github.event.inputs.lvls >= 42 }}
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Kör om nivå är tillräcklig
+        run: echo "Nivå är ${{ github.event.inputs.lvls }}, jobbet körs!"
+
+  skip: ${{ github.event.inputs.lvls < 42 }}
+  runs-on: ubuntu-latest
+  steps:
+    - name: Hoppa över jobbet
+      run: echo "Nivä är: ${{ github.event.inputs.lvls }}, för lågt för att köra jobbet."
